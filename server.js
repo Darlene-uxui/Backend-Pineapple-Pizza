@@ -35,6 +35,18 @@ app.post('/pizza', (req, res) => {
     res.send(req.body);
 });
 
+app.delete('/pizza/:id', (req, res) => {
+    const rawData = fs.readFileSync("./data/data.json");
+    const data = JSON.parse(rawData);
+
+    const newArray = data.pizza.filter((pizza) => {
+        return pizza.id != req.params.id;
+    });
+    data.pizza = newArray;
+    const newJson = JSON.stringify(data);
+    fs.writeFileSync("./data/data.json", newJson);
+    res.send("deleted: " + req.params.id);
+}) 
 
 
 
