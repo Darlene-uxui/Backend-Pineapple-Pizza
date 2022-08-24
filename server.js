@@ -11,6 +11,13 @@ app.use(express.json());
 uuidv4();
 
 
+app.get('/pizza', (req, res) => {
+    const rawData = fs.readFileSync("./data/data.json");
+    const data = JSON.parse(rawData);
+    res.json(data.pizza);
+});
+
+
 app.post('/pizza', (req, res) => {   
     const rawData = fs.readFileSync("./data/data.json");
 
